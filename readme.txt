@@ -1,4 +1,5 @@
 === Social Sharing ===
+
 Contributors: jukkak
 Tags: plugin, social, social media, sharing, share, facebook, instagram, twitter
 License: BSD 3-Clause License
