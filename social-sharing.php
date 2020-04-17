@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Social Sharing
  * Description:       Social media sharing buttons.
- * Version:           1.2
+ * Version:           1.3
  * Author:            Jukka Kalenius
  * Author URI:        https://github.com/jukkak05
  * License:           BSD 3-Clause License
