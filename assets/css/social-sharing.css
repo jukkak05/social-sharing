@@ -2,6 +2,11 @@
 * Standard black icons 
 **/
 
+#social-sharing,
+#social-sharing-buttons {
+	display: inline;
+}
+
 #social-sharing-buttons li {
 	display: inline;
 	list-style-type: none;

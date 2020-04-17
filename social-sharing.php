@@ -30,19 +30,18 @@ include ( SOCIAL_SHARING_DIR . 'inc/social-sharing-settings.php');
 function social_sharing_assets() {
 
     $options = get_option( 'social_sharing_settings');
+
+        // Javascript
+        wp_enqueue_script( 'social-sharing', SOCIAL_SHARING_URL . 'assets/js/social-sharing.js', ['jquery'], '1.3' );
   
-        // Stylesheet. Load only if user accepts in settings.
+        // Plugin stylesheet. Loaded only if user accepts in settings.
         if ( isset($options['stylesheet']) ) {
-            wp_enqueue_style( 'social-sharing', SOCIAL_SHARING_URL . 'assets/css/social-sharing.css', array(), '1.2');
+            wp_enqueue_style( 'social-sharing', SOCIAL_SHARING_URL . 'assets/css/social-sharing.css', array(), '1.3');
         }
 
-       // Javascript
-       wp_enqueue_script( 'social-share-media', SOCIAL_SHARING_URL . 'assets/js/social-share-media.js', ['jquery'], '1.2' );
-       wp_enqueue_script( 'social-sharing', SOCIAL_SHARING_URL . 'assets/js/social-sharing.js', ['jquery'], '1.2' );
-
-       // Font Awesome. Load only if user accepts in settings.    
+       // Font Awesome stylesheet. Loaded only if user accepts in settings.    
        if ( isset($options['font_awesome']) ) {
-            wp_enqueue_style( 'font-awesome-icons', SOCIAL_SHARING_URL . 'assets/css/all.min.css');
+            wp_enqueue_style( 'font-awesome-icons', SOCIAL_SHARING_URL . 'assets/css/brands.min.css');
        }
    
 }

@@ -10,13 +10,12 @@ function social_sharing_shortcodes ( $atts = '' ) {
         'pinterest' => 0,
         'email' => 0,
         'linkedin' => 0,
-        'twitterhandle' => ''
+        'twitterhandle' => '',
+        'sharetitle' => '',
     ), $atts );
 
     // Button containers with social media site attributes
-
     if ( max($site) === 0 ) {
-
         // Get options
         $options = get_option('social_sharing_settings');
 
@@ -34,8 +33,7 @@ function social_sharing_shortcodes ( $atts = '' ) {
         $size = '';
         $style = '';
 
-
-        // Check if settings have been saved
+        // Check if settings have been saved and apply escaping
         if ( isset($options['facebook']) ) {
             $facebook_setting = preg_replace("/[^1]/", "", $options['facebook'] );
         }
@@ -94,30 +92,32 @@ function social_sharing_shortcodes ( $atts = '' ) {
         $output .= 'data-icon-hover-color="' . $icon_hover_color . '"' . 'data-size="' . $size . '"';
         $output .= 'data-style="' . $style . '"' . '></ul></div>';
 
-    } else {
+    } 
+    else {
 
-        $sanitized_site = array();
+        $escaped_site = array();
 
-        foreach ($site as $key => $val) 
-        {
+        // Escape attributes before output
+        foreach ($site as $key => $val) {
+            
             if ($key == 'twitterhandle') {
 
-               $sanitized_twitter_handle = preg_replace("/[^a-z]/", "", $val);
+               $escaped_twitter_handle = preg_replace("/[^a-z]/", "", $val);
 
             } else {
 
-                $sanitized_site[$key] = preg_replace("/[^0-1]/", "", $val );
+                $escaped_site[$key] = preg_replace("/[^0-1]/", "", $val );
 
             }
         }
 
     // Output when shortcode attributes
     $output = '<div id="social-sharing">'; 
-    $output .= '<ul id="social-sharing-buttons"' . 'data-facebook="' . $sanitized_site['facebook'] .'"';
-    $output .= 'data-twitter="' . $sanitized_site['twitter'] . '"' . 'data-twitter-handle="' . $sanitized_twitter_handle . '"';
-    $output .= 'data-pinterest="' . $sanitized_site['pinterest'] . '"' . 'data-email="' . $sanitized_site['email'] . '"';
-    $output .= 'data-linkedin="' . $sanitized_site['linkedin'] . '"';
-    $output .= '></ul></div>';
+    $output .= '<ul id="social-sharing-buttons" data-facebook="' . $escaped_site['facebook'] .'" ';
+    $output .= 'data-twitter="' . $escaped_site['twitter'] . '" ' . 'data-twitter-handle="' . $escaped_twitter_handle . '" ';
+    $output .= 'data-pinterest="' . $escaped_site['pinterest'] . '" ' . 'data-email="' . $escaped_site['email'] . '" ';
+    $output .= 'data-linkedin="' . $escaped_site['linkedin'] . '">';
+    $output .= '</ul></div>';
 
     }
 
