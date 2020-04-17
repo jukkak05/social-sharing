@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Social Sharing
  * Description:       Social media sharing buttons.
- * Version:           1.1
+ * Version:           1.3
  * Author:            Jukka Kalenius
  * Author URI:        https://github.com/jukkak05
  * License:           BSD 3-Clause License
@@ -29,17 +29,22 @@ include ( SOCIAL_SHARING_DIR . 'inc/social-sharing-settings.php');
 // Include scripts and stylesheets
 function social_sharing_assets() {
 
-        
-        // Stylesheets
-       wp_enqueue_style( 'social-sharing', SOCIAL_SHARING_URL . 'assets/css/social-sharing.css');
+    $options = get_option( 'social_sharing_settings');
+  
+        // Stylesheet. Load only if user accepts in settings.
+        if ( isset($options['stylesheet']) ) {
+            wp_enqueue_style( 'social-sharing', SOCIAL_SHARING_URL . 'assets/css/social-sharing.css', array(), '1.2');
+        }
 
        // Javascript
-       wp_enqueue_script( 'social-share-media', SOCIAL_SHARING_URL . 'assets/js/social-share-media.js', ['jquery'], '1.1' );
-       wp_enqueue_script( 'social-sharing', SOCIAL_SHARING_URL . 'assets/js/social-sharing.js', ['jquery'], '1.1' );
+       wp_enqueue_script( 'social-share-media', SOCIAL_SHARING_URL . 'assets/js/social-share-media.js', ['jquery'], '1.2' );
+       wp_enqueue_script( 'social-sharing', SOCIAL_SHARING_URL . 'assets/js/social-sharing.js', ['jquery'], '1.2' );
 
-       // Font Awesome
-       wp_enqueue_style( 'font-awesome-icons', SOCIAL_SHARING_URL . 'assets/css/all.min.css');
-
+       // Font Awesome. Load only if user accepts in settings.    
+       if ( isset($options['font_awesome']) ) {
+            wp_enqueue_style( 'font-awesome-icons', SOCIAL_SHARING_URL . 'assets/css/all.min.css');
+       }
+   
 }
 add_action( 'wp_enqueue_scripts', 'social_sharing_assets', 10);
 

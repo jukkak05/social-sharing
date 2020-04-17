@@ -12,7 +12,7 @@ jQuery( document ).ready(function( $ ){
 		'title':pageTitle,
 		'desc':$('meta[name="description"]').attr('content'),
 		'text':$('meta[name="description"]').attr('content'),
-		'via':$('#buttons').data('twitterid'),
+		'via':$('#social-sharing-buttons').data('twitterHandle'),
 		'email_address':'share@to',
 		'provider':window.location.hostname,
 		'hash_tags':siteHashTag + ' #' + twitterTitle
@@ -27,103 +27,146 @@ jQuery( document ).ready(function( $ ){
 
 		children.push(
 			'<li class="' + socialmedium + '">' +
-			'<a href="' + socialmediaurls[socialmedium] + '"></a>' + 
+			'<a href="' + socialmediaurls[socialmedium] + '" target="_blank">' + '<span>' + socialmedium + '</span>' + '</a>' + 
 			'</li>' 
 		);
 	}
 
-	$('#social-sharing ul').empty();
+	//$('#social-sharing ul').empty();
 	$('#social-sharing ul').append(children.join(''));
 
-	// Image classes for social media icons
+	// Button styles from settings page
 
-	var twitterImage = '<i class="fab fa-twitter"></i>';
-	var facebookImage = '<i class="fab fa-facebook-f"></i>';
-	var emailImage = '<i class="fas fa-envelope"></i>';
-	var linkedinImage = '<i class="fab fa-linkedin-in"></i>';
-	var pinterestImage = '<i class="fab fa-pinterest-p"></i>';
+	if ( $('#social-sharing-buttons').length > 0 ) { 
 
-	// Go thru social media list and use correct icons
+		var buttonStyles = $('#social-sharing-buttons').data();
 
-	$('#buttons li').each(function () {
-
-		if ( $(this).hasClass('twitter') ) {
-
-	    	  $(this).children().append(twitterImage);
-
-	        } else if ( $(this).hasClass('facebook') ) {
-		
-		  $(this).children().append(facebookImage);
-
-		} else if ( $(this).hasClass('email') ) {
-
-		  $(this).children().append(emailImage);
-
-		} else if ( $(this).hasClass('linkedin') ) {
-
-		  $(this).children().append(linkedinImage);
-
-		} else {
-
-		  $(this).children().append(pinterestImage);
+		if ( buttonStyles.background ) { 
+			
+			buttonBackground(buttonStyles.background);
 
 		}
-	});
 
-	// Add settings page stylings
+		if ( buttonStyles.hover ) {
 
-	const buttonStyles = $('#buttons').data();
+			buttonHover(buttonStyles.hover);
 
-	switch (buttonStyles.size) {
+		}
 
-		case 1:
-		$('#buttons li').each(function () {
-			$(this).addClass('small');
-		});
-		break;	
+		if (buttonStyles.iconColor) {
+			
+			buttonIcon(buttonStyles.iconColor);
 
-		case 3: 
-		$('#buttons li').each(function () {
-			$(this).addClass('large');
-		});
-		break;
+		}
 
-		default:
-		break;
+		if (buttonStyles.iconHoverColor) {
+
+			buttonIconHover(buttonStyles.iconHoverColor);
+
+		}
+
+		if ( buttonStyles.size ) {
+			
+			buttonSize(buttonStyles.size);
+
+		}
+
+		if ( buttonStyles.style ) {
+			
+			buttonStyle(buttonStyles.style);
+
+		}
+
+		
 
 	}
 
-	switch (buttonStyles.style) {
+	function buttonBackground(background) {
 
-		case 2: 
-		$('#buttons li').each(function () {
-			$(this).addClass('square');
+		$('#social-sharing-buttons li a').each(function () {
+			$(this).css('background', background);
 		});
-		break;
 
-		default:
-		break;
 	}
 
-	if ( buttonStyles.background.length > 0 ) { 
+	function buttonStyle(style) {
 
-		$('#buttons li a').each(function () {
-			$(this).css('background', buttonStyles.background);
+		switch (style) {
+
+			case 2: 
+			$('#social-sharing-buttons li').each(function () {
+				$(this).addClass('square');
+			});
+			break;
+
+			default:
+			break;
+		}
+
+	}
+
+	function buttonIcon(color) {
+
+		$('#social-sharing-buttons li a').each(function () {
+
+			$(this).css('color', color);
+
 		});
 
-	 }
+	}
 
-	 if ( buttonStyles.hover.length > 0 ) {
+	function buttonIconHover(iconHover) {
 
-		const currentBg = $('#buttons li a').css('background');
+		var currentIconColor = $('#social-sharing-buttons li a').css('color');
 
-		$('#buttons li a').mouseover( function() {
+		$('#social-sharing-buttons li a').mouseover( function() {
 
-			 $(this).css('background', buttonStyles.hover);
+			$(this).css('color', iconHover);
+
+	   }); 
+	   
+	   $('#social-sharing-buttons li a').mouseout( function() {
+		   
+		   $(this).css('color', currentIconColor);
+	   
+	   });
+
+	}
+
+	function buttonSize(size) {
+
+		switch (size) {
+
+			case 1:
+			$('#social-sharing-buttons li').each(function () {
+				$(this).addClass('small');
+			});
+			break;	
+
+			case 3: 
+			$('#social-sharing-buttons li').each(function () {
+				$(this).addClass('large');
+			});
+			break;
+
+			default:
+			break;
+
+		}
+
+	}
+
+	function buttonHover(hover) {
+
+		var currentBg = $('#social-sharing-buttons li a').css('background');
+
+		$('#social-sharing-buttons li a').mouseover( function() {
+
+			 $(this).css('background', hover);
 
 		}); 
 		
-		$('#buttons li a').mouseout( function() {
+		$('#social-sharing-buttons li a').mouseout( function() {
 			
 			$(this).css('background', currentBg);
 		

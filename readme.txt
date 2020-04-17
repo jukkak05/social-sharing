@@ -1,7 +1,7 @@
 === Social Sharing ===
 
-Contributors: jukkak
-Tags: plugin, social, social media, sharing, share, facebook, instagram, twitter
+Contributors: jukkak, mikkop?, bradvin?
+Tags: social, social media, sharing, facebook, twitter, linkedin, pinterest
 License: BSD 3-Clause License
 License URI: https://opensource.org/licenses/BSD-3-Clause
 
@@ -39,15 +39,21 @@ twitter=1
 email=1
 linkedin=1
 pinterest=1
-twitterid=handle
+twittehandle=handle
 
-Example: [social-sharing email=1 linkedin=1 twitter=1 twitterid=konseptofi]
+Example: [social-sharing email=1 linkedin=1 twitter=1 twitterhandle=konseptofi]
 
 Sharing links will have correct information if you have seo meta tags on page. 
 
 Plugin uses font awesome icons. You can easily change colors and icons with css, see social-sharing.css. 
 
 == Changelog ==
+
+= 1.2 =
+
+New settings and sanitization. 
+
+Switched shortcode attribute twitterid to twitterhandle. 
 
 = 1.1 =
 

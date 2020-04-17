@@ -43,13 +43,14 @@ function social_sharing_settings_section() {
  	// our callback function just has to echo the <input>
      register_setting( 
         'social_sharing_settings', 
-        'social_sharing_settings' 
+        'social_sharing_settings', 
+        'social_sharing_settings_sanitize_callback' 
     );
 
     // Social media sites section
     add_settings_section( 
         'social_sharing_settings_sites_section', 
-        'Sites',
+        '',
         'social_sharing_settings_sites_section_callback',
         'social-sharing' 
     );
@@ -76,17 +77,17 @@ function social_sharing_settings_fields () {
     // Sites checkboxes
     add_settings_field( 
         'social_sharing_settings_sites', 
-        'Social Sharing Sites', 
+        'Social Media Sites', 
         'social_sharing_settings_sites_callback', 
         'social-sharing', 
         'social_sharing_settings_sites_section' 
     );
 
-    // Twitterid input text
+    // Twitter handle input text
     add_settings_field( 
-        'social_sharing_settings_twitterid', 
+        'social_sharing_settings_twitter_handle', 
         'Twitter handle', 
-        'social_sharing_settings_twitterid_callback', 
+        'social_sharing_settings_twitter_handle_callback', 
         'social-sharing', 
         'social_sharing_settings_sites_section'
     );
@@ -94,7 +95,7 @@ function social_sharing_settings_fields () {
     // Buttons background color
     add_settings_field( 
         'social_sharing_settings_buttons_background', 
-        'Buttons bg color', 
+        'Background color', 
         'social_sharing_settings_buttons_background_callback', 
         'social-sharing', 
         'social_sharing_settings_styles_section'
@@ -103,7 +104,7 @@ function social_sharing_settings_fields () {
     // Buttons background hover
     add_settings_field( 
         'social_sharing_settings_buttons_background_hover', 
-        'Buttons bg hover', 
+        'Background hover', 
         'social_sharing_settings_buttons_background_hover_callback', 
         'social-sharing', 
         'social_sharing_settings_styles_section'
@@ -112,8 +113,17 @@ function social_sharing_settings_fields () {
     // Buttons icon color
     add_settings_field( 
         'social_sharing_settings_butttons_icon_color', 
-        'Buttons icon color', 
+        'Icon color', 
         'social_sharing_settings_buttons_icon_color_callback', 
+        'social-sharing', 
+        'social_sharing_settings_styles_section'
+    );
+
+    // Buttons icon hover color
+    add_settings_field( 
+        'social_sharing_settings_butttons_icon_hover_color', 
+        'Icon hover color', 
+        'social_sharing_settings_buttons_icon_hover_color_callback', 
         'social-sharing', 
         'social_sharing_settings_styles_section'
     );
@@ -121,7 +131,7 @@ function social_sharing_settings_fields () {
     // Buttons icon size
     add_settings_field( 
         'social_sharing_settings_icon_size', 
-        'Buttons icon size', 
+        'Size', 
         'social_sharing_settings_icon_size_callback', 
         'social-sharing', 
         'social_sharing_settings_styles_section'
@@ -131,11 +141,31 @@ function social_sharing_settings_fields () {
 
     add_settings_field( 
         'social_sharing_settings_buttons_style', 
-        'Buttons style', 
+        'Style', 
         'social_sharing_settings_buttons_style_callback', 
         'social-sharing', 
         'social_sharing_settings_styles_section' 
     );
+
+    // Stylesheet
+
+    add_settings_field( 
+        'social_sharing_settings_stylesheet', 
+        'Buttons stylesheet', 
+        'social_sharing_settings_stylesheet_callback', 
+        'social-sharing', 
+        'social_sharing_settings_styles_section' 
+    );
+
+    // Font awesome css
+    add_settings_field(
+        'social_sharing_settings_font_awesome', 
+        'Font awesome stylesheet', 
+        'social_sharing_settings_font_awesome_callback', 
+        'social-sharing', 
+        'social_sharing_settings_styles_section' 
+    );
+   
 
 
 }
@@ -171,38 +201,38 @@ function social_sharing_settings_sites_callback() {
     }
 
     $html = '<input type="checkbox" id="facebook" name="social_sharing_settings[facebook]" value="1"' . checked( 1, $facebook, false ) . '/>';
-    $html .= '<label for="facebook">Facebook</label>';
+    $html .= '<label for="facebook">Facebook</label>&nbsp;';
 
     $html .= '<input type="checkbox" id="twitter" name="social_sharing_settings[twitter]"  value="1"' . checked( 1, $twitter, false ) . '/>';
-    $html .= '<label for="twitter">Twitter</label>';
+    $html .= '<label for="twitter">Twitter&nbsp;</label>&nbsp;';
 
     $html .= '<input type="checkbox" id="email" name="social_sharing_settings[email]" Value="1"' . checked( 1, $email, false ) . '/>';
-    $html .= '<label for="email">Email</label>';
+    $html .= '<label for="email">Email&nbsp;</label>&nbsp;';
 
     $html .= '<input type="checkbox" id="linkedin" name="social_sharing_settings[linkedin]" value="1"' . checked( 1, $linkedin, false ) . '/>';
-    $html .= '<label for="linkedin">LinkedIN</label>';
+    $html .= '<label for="linkedin">LinkedIN&nbsp;</label>&nbsp;';
 
     $html .= '<input type="checkbox" id="pinterest" name="social_sharing_settings[pinterest]" value="1"' . checked( 1, $pinterest, false ) . '/>';
-    $html .= '<label for="pinterest">Pinterest</label>';
+    $html .= '<label for="pinterest">Pinterest&nbsp;</label>';
 
     echo $html;
 
 }
 
-function social_sharing_settings_twitterid_callback() {
+function social_sharing_settings_twitter_handle_callback() {
 
     $options = get_option( 'social_sharing_settings' );
 
     $text_input = '';
 
-    // Get the current value of twitterid
-    if ( isset( $options[ 'twitterid' ] ) ) {
+    // Get the current value of twitter handle
+    if ( isset( $options[ 'twitter_handle' ] ) ) {
 
-        $text_input = $options[ 'twitterid' ] ;
+        $text_input = $options[ 'twitter_handle' ] ;
         
     }
 
-    echo '<input type="text" id="social_sharing_twitterid" name="social_sharing_settings[twitterid]" 
+    echo '<input type="text" id="twitter_handle" name="social_sharing_settings[twitter_handle]" 
     value="' . $text_input . '" />';
 
 }
@@ -262,6 +292,25 @@ function social_sharing_settings_buttons_icon_color_callback() {
 
 }
 
+function social_sharing_settings_buttons_icon_hover_color_callback() {
+
+    $options = get_option( 'social_sharing_settings' );
+
+    $text_input = '';
+
+    // Get the current value of icon hover color 
+    if ( isset( $options[ 'icon_hover_color' ] ) ) {
+
+        $text_input = $options[ 'icon_hover_color' ] ;
+        
+    }
+
+    echo '<input type="text" id="social_sharing_buttons_icon_hover_color" name="social_sharing_settings[icon_hover_color]" 
+    value="' . $text_input . '" />';
+
+
+}
+
 function social_sharing_settings_icon_size_callback() {
 
     $options = get_option( 'social_sharing_settings' );
@@ -276,15 +325,15 @@ function social_sharing_settings_icon_size_callback() {
 
     $html = '<input type="radio" id="social_sharing_settings_size_small" 
     name="social_sharing_settings[size]" value="1"' . checked( 1, $size, false) . '/>';
-    $html .= '<label for="social_sharing_settings_size_small">' . 'Small' . '</label>';
+    $html .= '<label for="social_sharing_settings_size_small">' . 'Small (26x26)' . '</label>&nbsp;';
 
     $html .= '<input type="radio" id="social_sharing_settings_size_medium" 
     name="social_sharing_settings[size]" value="2"' . checked( 2, $size, false) . '/>';
-    $html .= '<label for="social_sharing_settings_size_medium">' . 'Medium' . '</label>';
+    $html .= '<label for="social_sharing_settings_size_medium">' . 'Medium (38x38)' . '</label>&nbsp;';
 
     $html .= '<input type="radio" id="social_sharing_settings_size_large" 
     name="social_sharing_settings[size]" value="3"' . checked( 3, $size, false) . '/>';
-    $html .= '<label for="social_sharing_settings_size_large">' . 'Large' . '</label>';
+    $html .= '<label for="social_sharing_settings_size_large">' . 'Large (46x46)' . '</label>';
 
     echo $html;
 
@@ -304,7 +353,7 @@ function social_sharing_settings_buttons_style_callback() {
 
     $html = '<input type="radio" id="social_sharing_settings_style_round" 
     name="social_sharing_settings[style]" value="1"' . checked( 1, $style, false) . '/>';
-    $html .= '<label for="social_sharing_settings_style_round">' . 'Round' . '</label>';
+    $html .= '<label for="social_sharing_settings_style_round">' . 'Round' . '</label>&nbsp;';
 
     $html .= '<input type="radio" id="social_sharing_settings_style_square" 
     name="social_sharing_settings[style]" value="2"' . checked( 2, $style, false) . '/>';
@@ -312,5 +361,73 @@ function social_sharing_settings_buttons_style_callback() {
 
     echo $html;
 
+
+}
+
+function social_sharing_settings_stylesheet_callback() {
+
+    $options = get_option( 'social_sharing_settings' );
+
+    $stylesheet = '';
+
+    if ( isset($options['stylesheet']) ) {
+
+        $stylesheet = $options['stylesheet'];
+
+    }
+
+    $html = '<input type="checkbox" id="stylesheet" name="social_sharing_settings[stylesheet]" value="1"' . checked( 1, $stylesheet, false ) . '/>';
+   
+    echo $html;
+
+
+}
+
+function social_sharing_settings_font_awesome_callback() {
+
+    $options = get_option( 'social_sharing_settings' );
+
+    $font_awesome = '';
+
+    if ( isset($options['font_awesome']) ) {
+
+        $font_awesome = $options['font_awesome'];
+
+    }
+
+    $html = '<input type="checkbox" id="font-awesome" name="social_sharing_settings[font_awesome]" value="1"' . checked( 1, $font_awesome, false ) . '/>';
+   
+    echo $html;
+
+
+}
+
+function social_sharing_settings_sanitize_callback($input) {
+
+    $output = array();
+
+    // Remove any array key that is not in our whitelist
+    $allowed_keys = ['facebook', 'twitter', 'linkedin', 'email', 'pinterest', 'twitter_handle', 'background',
+     'background_hover', 'icon_color', 'icon_hover_color', 'size', 'style', 'stylesheet', 'font_awesome'];
+    
+    foreach ($input as $key => $value) {
+
+        if (!in_array($key, $allowed_keys)) {
+            unset($input[$key]);
+        }
+
+    }
+
+    foreach( $input as $key => $value ) {
+
+      if( isset( $input[$key] ) ) {
+         
+            // Sanitize the strings with wordpress function            
+            $output[$key] = sanitize_text_field( $input[$key] );
+        } 
+         
+    } 
+   
+    return $output;
 
 }

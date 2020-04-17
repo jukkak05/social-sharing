@@ -22,11 +22,11 @@ function GetSocialMediaSites_WithShareLinks_OrderedByPopularity() {
 
 	// Check shortcode output for social media site attributes
 
-	var facebookData =  jQuery('#buttons').data('facebook');
-	var twitterData = jQuery('#buttons').data('twitter');
-	var emailData = jQuery('#buttons').data('email');
-	var linkedinData = jQuery('#buttons').data('linkedin');
-	var pinterestData = jQuery('#buttons').data('pinterest');
+	var facebookData =  jQuery('#social-sharing-buttons').data('facebook');
+	var twitterData = jQuery('#social-sharing-buttons').data('twitter');
+	var emailData = jQuery('#social-sharing-buttons').data('email');
+	var linkedinData = jQuery('#social-sharing-buttons').data('linkedin');
+	var pinterestData = jQuery('#social-sharing-buttons').data('pinterest');
 
 	var sites = [];
 
