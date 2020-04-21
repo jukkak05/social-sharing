@@ -75,7 +75,6 @@
 }
 
 @media (max-width:600px) {
-
 	#social-sharing-buttons li a { 
 		width: 33px;
 		height: 33px;
@@ -84,7 +83,6 @@
 	#social-sharing-buttons .fab {
 		font-size: 12px;
 	}
-
 }
 
 /**
@@ -92,41 +90,29 @@
 **/
 
 #social-sharing-buttons li.small a {
-
 	width: 26px;
 	height: 26px;
-
 }
 
 #social-sharing-buttons li.small {
-
 	font-size: 10px;
-
 }
 
 #social-sharing-buttons li.small a:before {
-
 	padding-top: 8px;
-
 }
 
 #social-sharing-buttons li.large a {
-
 	width: 46px;
 	height: 46px;
-
 }
 
 #social-sharing-buttons li.large {
-
 	font-size: 20px;
-
 }
 
 #social-sharing-buttons li.large a:before {
-
 	padding-top: 13px;
-
 }
 
 /**
@@ -134,22 +120,7 @@
 **/
 
 #social-sharing li.square a {
-
 	border-radius: 0px;
-
 }
 
-
-/**
-* Font Awesome classes:
-* .fa-twitter, .fa-facebook-f, 
-* .fa-envelope, .fa-linkedin-in, 
-* .fa-pinterest-p
-* Use :before pseudo and unicode from fontawesome.com
-*
-* Example: 
-*   .fa-facebook-f:before {
-*       content:'\f39f' !important;
-*   }
-**/
 

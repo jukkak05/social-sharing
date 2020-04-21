@@ -1,121 +1,112 @@
 jQuery( document ).ready(function( $ ) {
 
-function GetSocialMediaSites_WithShareLinks_OrderedByPopularity() {
+	function GetSocialMediaSites_WithShareLinks_OrderedByPopularity() {
 
-	// Get data attributes for correct sites output
-	var facebookData =  $('#social-sharing-buttons').data('facebook');
-	var twitterData = $('#social-sharing-buttons').data('twitter');
-	var emailData = $('#social-sharing-buttons').data('email');
-	var linkedinData = $('#social-sharing-buttons').data('linkedin');
-	var pinterestData = $('#social-sharing-buttons').data('pinterest');
+		// Get data attributes for correct sites output
+		var facebookData =  $('#social-sharing-buttons').data('facebook');
+		var twitterData = $('#social-sharing-buttons').data('twitter');
+		var emailData = $('#social-sharing-buttons').data('email');
+		var linkedinData = $('#social-sharing-buttons').data('linkedin');
+		var pinterestData = $('#social-sharing-buttons').data('pinterest');
 
-	var sites = [];
+		var sites = [];
 
-	if ( facebookData == "1" ) {
-		sites.push('facebook');
-	} 
-	
-	if ( twitterData == "1" ) {
-		sites.push('twitter');
-	} 
-	
-	if ( emailData == "1" ) {
-		sites.push('email');
-	} 
-	
-	if ( linkedinData == "1" ) {
-		sites.push('linkedin');
-	} 
-	
-	if ( pinterestData == "1" ) {
-		sites.push('pinterest');
-	} 
+		if ( facebookData == "1" ) {
+			sites.push('facebook');
+		} 
+		
+		if ( twitterData == "1" ) {
+			sites.push('twitter');
+		} 
+		
+		if ( emailData == "1" ) {
+			sites.push('email');
+		} 
+		
+		if ( linkedinData == "1" ) {
+			sites.push('linkedin');
+		} 
+		
+		if ( pinterestData == "1" ) {
+			sites.push('pinterest');
+		} 
 
-	return sites;
+		return sites;
 
-		/*** These sites can also be added:
-		'google.bookmarks',
-		'reddit',
-		'tumblr',
-		'blogger',
-		'livejournal',
-		'evernote',
-		'add.this',
-		'getpocket',
-		'hacker.news',
-		'digg',
-		'buffer',
-		'flipboard',
-		'instapaper',
-		'surfingbird.ru',
-		'flattr',
-		'diaspora',
-		'qzone',
-		'vk',
-		'weibo',
-		'ok.ru',
-		'douban',
-		'xing',
-		'renren',
-		'threema',
-		'sms',
-		'line.me',
-		'skype',
-		'telegram.me',
-		'gmail',
-		'yahoo',
-		***/
+			/*** These sites can also be added. 
+			'google.bookmarks',
+			'reddit',
+			'tumblr',
+			'blogger',
+			'livejournal',
+			'evernote',
+			'add.this',
+			'getpocket',
+			'hacker.news',
+			'digg',
+			'buffer',
+			'flipboard',
+			'instapaper',
+			'surfingbird.ru',
+			'flattr',
+			'diaspora',
+			'qzone',
+			'vk',
+			'weibo',
+			'ok.ru',
+			'douban',
+			'xing',
+			'renren',
+			'threema',
+			'sms',
+			'line.me',
+			'skype',
+			'telegram.me',
+			'gmail',
+			'yahoo',
+			***/
 
-}
+	}
 
-// Social Media Site Links With Share Links
-function GetSocialMediaSiteLinks_WithShareLinks(args) {
-	const validargs = [
-		'url',
-		'title',
-		'desc',
-		'via',
-		'hash_tags',
-		'provider',
-		'email_address'
-	];
-	
-	for(var i = 0; i < validargs.length; i++) {
-		const validarg = validargs[i];
-		if(!args[validarg]) {
-			args[validarg] = '';
+	// Social Media Site Links With Share Links
+	function GetSocialMediaSiteLinks_WithShareLinks(args) {
+		const validargs = [
+			'url',
+			'title',
+			'desc',
+			'via',
+			'hash_tags',
+			'email_address'
+		];
+		
+		for(var i = 0; i < validargs.length; i++) {
+			const validarg = validargs[i];
+			if(!args[validarg]) {
+				args[validarg] = '';
+			}
 		}
+		
+		const url = fixedEncodeURIComponent(args.url);
+		const title = fixedEncodeURIComponent(args.title);
+		const desc = fixedEncodeURIComponent(args.desc);
+		const via = fixedEncodeURIComponent(args.via);
+		const hash_tags = fixedEncodeURIComponent(args.hash_tags);
+		const email_address = fixedEncodeURIComponent(args.email_address);
+		
+		return {
+			'email':'mailto:' + email_address + '?subject=' + title + '&body=' + url + escape("\n\n") + desc,
+			'facebook':'http://www.facebook.com/sharer.php?u=' + url,
+			'linkedin':'https://www.linkedin.com/sharing/share-offsite/?url=' + url,
+			'pinterest':'http://pinterest.com/pin/create/button/?url=' + url,
+			'twitter':'https://twitter.com/intent/tweet?url=' + url + '&text=' + title + '&via=' + via + '&hashtags=' + hash_tags
+		};
 	}
-	
-	const url = fixedEncodeURIComponent(args.url);
-	const title = fixedEncodeURIComponent(args.title);
-	const desc = fixedEncodeURIComponent(args.desc);
-	const via = fixedEncodeURIComponent(args.via);
-	const hash_tags = fixedEncodeURIComponent(args.hash_tags);
-	const provider = fixedEncodeURIComponent(args.provider);
-	const email_address = fixedEncodeURIComponent(args.email_address);
-	
-	var text = title;
-	
-	if(desc) {
-		text += '%20%3A%20';	
-		text += desc;
-	}
-	
-	return {
-		'email':'mailto:' + email_address + '?subject=' + title + '&body=' + desc,
-		'facebook':'http://www.facebook.com/sharer.php?u=' + url,
-		'linkedin':'https://www.linkedin.com/shareArticle?mini=true&url=' + url,
-		'pinterest':'http://pinterest.com/pin/create/button/?url=' + url ,
-		'twitter':'https://twitter.com/intent/tweet?url=' + url + '&text=' + title + '&via=' + via + '&hashtags=' + hash_tags
-	};
-}
 
-function fixedEncodeURIComponent(str) {
-	return encodeURIComponent(str).replace(/[!'()*]/g, function(c) {
-		return '%' + c.charCodeAt(0).toString(16);
-	});
-}
+	function fixedEncodeURIComponent(str) {
+		return encodeURIComponent(str).replace(/[!'()*]/g, function(c) {
+			return '%' + c.charCodeAt(0).toString(16);
+		});
+	}
 
 	// Get additional info for sharing
 	const pageTitle = $('h1').text();
@@ -130,7 +121,6 @@ function fixedEncodeURIComponent(str) {
 		'text':$('meta[name="description"]').attr('content'),
 		'via':$('#social-sharing-buttons').data('twitterHandle'),
 		'email_address':'',
-		'provider':window.location.hostname,
 		'hash_tags':siteHashTag + ' #' + twitterTitle
 	});
 	
@@ -178,52 +168,58 @@ function fixedEncodeURIComponent(str) {
 	}
 
 	$('#social-sharing ul').append(children.join(''));
-
+	
 	// Button styles from settings page
-	// Used when shortcode without attributes
-	if ( $('#social-sharing-buttons').length > 0 ) { 
+	// Used when shortcode is without attributes
+	const buttonStyles = $('#social-sharing-buttons').data();
 
-		var buttonStyles = $('#social-sharing-buttons').data();
-
-		if ( buttonStyles.background ) { 			
-			buttonBackground(buttonStyles.background);
-		}
-
-		if ( buttonStyles.hover ) {
-			buttonHover(buttonStyles.hover);
-		}
+	if (buttonStyles.settingsPage) { 
 
 		if (buttonStyles.iconColor) {			
 			buttonIcon(buttonStyles.iconColor);
+		}
+
+		if (buttonStyles.background) { 			
+			buttonBackground(buttonStyles.background);
+		}
+
+		if (buttonStyles.size) {			
+			buttonSize(buttonStyles.size);
+		}
+
+		if (buttonStyles.style) {			
+			buttonStyle(buttonStyles.style);
+		}
+
+		if (buttonStyles.hover) {
+			buttonHover(buttonStyles.hover);
+		}
+
+		if (!buttonStyles.hover) {
+			buttonHoverNoSetting();
 		}
 
 		if (buttonStyles.iconHoverColor) {
 			buttonIconHover(buttonStyles.iconHoverColor);
 		}
 
-		if ( buttonStyles.size ) {			
-			buttonSize(buttonStyles.size);
-		}
-
-		if ( buttonStyles.style ) {			
-			buttonStyle(buttonStyles.style);
+		if (!buttonStyles.iconHoverColor) {
+			buttonIconHoverNoSetting();
 		}
 
 	}
 
 	function buttonBackground(background) {
-		$('#social-sharing-buttons li a').each(function () {
-			$(this).css('background', background);
-		});
+
+		$('#social-sharing-buttons li a').css('background', background);
+
 	}
 
 	function buttonStyle(style) {
 
 		switch (style) {
 			case 2: 
-			$('#social-sharing-buttons li').each(function () {
-				$(this).addClass('square');
-			});
+			$('#social-sharing-buttons li').addClass('square');	
 			break;
 
 			default:
@@ -232,17 +228,14 @@ function fixedEncodeURIComponent(str) {
 	}
 
 	function buttonIcon(color) {
-		$('#social-sharing-buttons li a').each(function () {
 
-			$(this).css('color', color);
-
-		});
+		$('#social-sharing-buttons li a').css('color', color); 
 
 	}
 
 	function buttonIconHover(iconHover) {
 
-		var currentIconColor = $('#social-sharing-buttons li a').css('color');
+		const currentIconColor = $('#social-sharing-buttons li a').css('color');
 
 		$('#social-sharing-buttons li a').mouseover( function() {
 
@@ -258,19 +251,27 @@ function fixedEncodeURIComponent(str) {
 
 	}
 
+	function buttonIconHoverNoSetting() {
+
+		const currentIconColor = $('#social-sharing-buttons li a').css('color');
+
+		$('#social-sharing-buttons li a').mouseover( function() {
+
+			$(this).css('color', currentIconColor);
+
+	   }); 
+
+	}
+
 	function buttonSize(size) {
 		
 		switch (size) {
 			case 1:
-			$('#social-sharing-buttons li').each(function () {
-				$(this).addClass('small');
-			});
+			$('#social-sharing-buttons li').addClass('small');
 			break;	
 
 			case 3: 
-			$('#social-sharing-buttons li').each(function () {
-				$(this).addClass('large');
-			});
+			$('#social-sharing-buttons li').addClass('large');
 			break;
 
 			default:
@@ -281,7 +282,7 @@ function fixedEncodeURIComponent(str) {
 
 	function buttonHover(hover) {
 
-		var currentBg = $('#social-sharing-buttons li a').css('background');
+		const currentBg = $('#social-sharing-buttons li a').css('background-color');
 
 		$('#social-sharing-buttons li a').mouseover( function() {
 
@@ -293,6 +294,16 @@ function fixedEncodeURIComponent(str) {
 			
 			$(this).css('background', currentBg);
 		
+		});
+
+	}
+
+	function buttonHoverNoSetting() {
+
+		const currentBg = $('#social-sharing-buttons li a').css('background-color');
+
+		$('#social-sharing-buttons li a').mouseover(function () {
+			$(this).css('background-color', currentBg);
 		});
 
 	}

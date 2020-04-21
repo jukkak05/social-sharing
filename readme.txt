@@ -49,11 +49,21 @@ Plugin uses font awesome icons. You can easily change colors and icons with css,
 
 == Changelog ==
 
+= 1.4 = 
+
+Removed other LinkedIn parameters than url as they seem to be ignored by LinkedIn. 
+
+Improvements to escaping, accessibility, styling and code structure. 
+
+Added url to email share body. 
+
+Added Font Awesome solid stylesheet for email icon. 
+
 = 1.3 =
 
-Improved localization and accessibility. 
+Added localization, escaping and improved accessibility. 
 
-Updated twitter and linkedin sharing links. 
+New setting for sharing title. 
 
 = 1.2 =
 
