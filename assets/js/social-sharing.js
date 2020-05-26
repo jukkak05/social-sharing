@@ -173,7 +173,7 @@ jQuery( document ).ready(function( $ ) {
 	// Used when shortcode is without attributes
 	const buttonStyles = $('#social-sharing-buttons').data();
 
-	if (buttonStyles.settingsPage) { 
+	if (buttonStyles && buttonStyles.settingsPage) { 
 
 		if (buttonStyles.iconColor) {			
 			buttonIcon(buttonStyles.iconColor);
