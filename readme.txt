@@ -49,6 +49,14 @@ Plugin uses font awesome icons. You can easily change colors and icons with css,
 
 == Changelog ==
 
+= 1.4.2 = 
+
+Fixed javascript error when page doesn't use sharing buttons. 
+
+= 1.4.1 = 
+
+Improved styling support for themes that don't have the recommended accessibility class.
+
 = 1.4 = 
 
 Removed other LinkedIn parameters than url as they seem to be ignored by LinkedIn. 
