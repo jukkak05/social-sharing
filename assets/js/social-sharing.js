@@ -19,16 +19,16 @@ jQuery( document ).ready(function( $ ) {
 			sites.push('twitter');
 		} 
 		
-		if ( emailData == "1" ) {
-			sites.push('email');
-		} 
-		
 		if ( linkedinData == "1" ) {
 			sites.push('linkedin');
 		} 
 		
 		if ( pinterestData == "1" ) {
 			sites.push('pinterest');
+		} 
+
+		if ( emailData == "1" ) {
+			sites.push('email');
 		} 
 
 		return sites;
