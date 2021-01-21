@@ -39,6 +39,7 @@ twitter=1
 email=1
 linkedin=1
 pinterest=1
+whatsapp=1
 twitterhandle=handle
 
 Example: [social-sharing email=1 linkedin=1 twitter=1 twitterhandle=konseptofi]
@@ -48,6 +49,10 @@ Sharing links will have correct information if you have seo meta tags on page.
 Plugin uses font awesome icons. You can easily change colors and icons with css, see social-sharing.css. 
 
 == Changelog ==
+
+= 1.5 =
+
+Added Whatsapp sharing and fixed data attribute spacing. 
 
 = 1.4.3 =
 
