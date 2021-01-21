@@ -71,6 +71,10 @@
 	content: "\f231";
 }
 
+#social-sharing-buttons li.whatsapp a:before  {
+	content: "\f232";
+}
+
 #social-sharing-buttons li.email a:before  {
 	content: "\f0e0";
 	font-family: "Font Awesome 5 Free";
