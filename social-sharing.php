@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Social Sharing
  * Description:       Social media sharing buttons.
- * Version:           1.4.2
+ * Version:           1.4.3
  * Author:            Jukka Kalenius
  * Author URI:        https://github.com/jukkak05
  * License:           BSD 3-Clause License
@@ -32,11 +32,11 @@ function social_sharing_assets() {
     $options = get_option( 'social_sharing_settings');
 
         // Javascript
-        wp_enqueue_script( 'social-sharing', SOCIAL_SHARING_URL . 'assets/js/social-sharing.js', ['jquery'], '1.4.2' );
+        wp_enqueue_script( 'social-sharing', SOCIAL_SHARING_URL . 'assets/js/social-sharing.js', ['jquery'], '1.4.3' );
   
         // Plugin stylesheet. Loaded only if user accepts in settings.
         if ( isset($options['stylesheet']) ) {
-            wp_enqueue_style( 'social-sharing', SOCIAL_SHARING_URL . 'assets/css/social-sharing.css', array(), '1.4.2');
+            wp_enqueue_style( 'social-sharing', SOCIAL_SHARING_URL . 'assets/css/social-sharing.css', array(), '1.4.3');
         }
 
        // Font Awesome stylesheets. Loaded only if user accepts in settings.    
