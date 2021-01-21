@@ -68,7 +68,7 @@ function social_sharing_settings_sites_section_callback() {
     echo '<p>';
     esc_html_e( 'Use shortcode [social-sharing] for settings page version. If you use shortcode attributes then these settings are overridden.','social-sharing' );
     echo '<br><br>';
-    esc_html_e( 'Available attributes are: facebook=1 twitter=1 email=1 linkedin=1 pinterest=1 twitterhandle=handle.','social-sharing' );
+    esc_html_e( 'Available attributes are: facebook=1 twitter=1 linkedin=1 pinterest=1 whatsapp=1 email=1 twitterhandle=handle.','social-sharing' );
     echo '</p>';
 }
 
@@ -185,9 +185,10 @@ function social_sharing_settings_sites_callback() {
 
     $facebook = '';
     $twitter = '';
-    $email = '';
     $linkedin = '';
     $pinterest = '';
+    $whatsapp = '';
+    $email = '';
 
     if ( isset($options['facebook']) ) {
          $facebook = $options['facebook'];
@@ -196,10 +197,7 @@ function social_sharing_settings_sites_callback() {
     if ( isset($options['twitter']) ) {
         $twitter = $options['twitter'];
     }
-    if ( isset($options['email']) ) {
-        $email = $options['email'];
-    }
-
+   
     if ( isset($options['linkedin']) ) {
         $linkedin = $options['linkedin'];
     }
@@ -208,20 +206,31 @@ function social_sharing_settings_sites_callback() {
         $pinterest = $options['pinterest'];
     }
 
+    if ( isset($options['whatsapp']) ) {
+        $whatsapp = $options['whatsapp'];
+    }
+
+    if ( isset($options['email']) ) {
+        $email = $options['email'];
+    }
+
     $html = '<input type="checkbox" id="facebook" name="social_sharing_settings[facebook]" value="1"' . checked( 1, $facebook, false ) . '/>';
     $html .= '<label for="facebook">Facebook</label>&nbsp;';
 
     $html .= '<input type="checkbox" id="twitter" name="social_sharing_settings[twitter]"  value="1"' . checked( 1, $twitter, false ) . '/>';
     $html .= '<label for="twitter">Twitter&nbsp;</label>&nbsp;';
 
-    $html .= '<input type="checkbox" id="email" name="social_sharing_settings[email]" Value="1"' . checked( 1, $email, false ) . '/>';
-    $html .= '<label for="email">Email&nbsp;</label>&nbsp;';
-
     $html .= '<input type="checkbox" id="linkedin" name="social_sharing_settings[linkedin]" value="1"' . checked( 1, $linkedin, false ) . '/>';
     $html .= '<label for="linkedin">LinkedIN&nbsp;</label>&nbsp;';
 
     $html .= '<input type="checkbox" id="pinterest" name="social_sharing_settings[pinterest]" value="1"' . checked( 1, $pinterest, false ) . '/>';
     $html .= '<label for="pinterest">Pinterest&nbsp;</label>';
+
+    $html .= '<input type="checkbox" id="whatsapp" name="social_sharing_settings[whatsapp]" value="1"' . checked( 1, $whatsapp, false ) . '/>';
+    $html .= '<label for="whatsapp">Whatsapp&nbsp;</label>';
+
+    $html .= '<input type="checkbox" id="email" name="social_sharing_settings[email]" Value="1"' . checked( 1, $email, false ) . '/>';
+    $html .= '<label for="email">Email&nbsp;</label>&nbsp;';
 
     echo $html;
 
@@ -439,6 +448,7 @@ function social_sharing_settings_sanitize_callback($input) {
         'sharing_title',
         'stylesheet', 
         'font_awesome',
+        'whatsapp',
     ];
     
     foreach ($input as $key => $value) {
