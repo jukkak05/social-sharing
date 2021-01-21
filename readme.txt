@@ -49,6 +49,10 @@ Plugin uses font awesome icons. You can easily change colors and icons with css,
 
 == Changelog ==
 
+= 1.4.3 =
+
+Minor change: Email icon moved to last.
+
 = 1.4.2 = 
 
 Fixed javascript error when page doesn't use sharing buttons. 
