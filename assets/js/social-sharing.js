@@ -5,9 +5,10 @@ jQuery( document ).ready(function( $ ) {
 		// Get data attributes for correct sites output
 		var facebookData =  $('#social-sharing-buttons').data('facebook');
 		var twitterData = $('#social-sharing-buttons').data('twitter');
-		var emailData = $('#social-sharing-buttons').data('email');
 		var linkedinData = $('#social-sharing-buttons').data('linkedin');
 		var pinterestData = $('#social-sharing-buttons').data('pinterest');
+		var whatsappData = $('#social-sharing-buttons').data('whatsapp');
+		var emailData = $('#social-sharing-buttons').data('email');
 
 		var sites = [];
 
@@ -26,45 +27,16 @@ jQuery( document ).ready(function( $ ) {
 		if ( pinterestData == "1" ) {
 			sites.push('pinterest');
 		} 
+		
+		if ( whatsappData == "1" ) {
+			sites.push('whatsapp');
+		} 
 
 		if ( emailData == "1" ) {
 			sites.push('email');
 		} 
 
 		return sites;
-
-			/*** These sites can also be added. 
-			'google.bookmarks',
-			'reddit',
-			'tumblr',
-			'blogger',
-			'livejournal',
-			'evernote',
-			'add.this',
-			'getpocket',
-			'hacker.news',
-			'digg',
-			'buffer',
-			'flipboard',
-			'instapaper',
-			'surfingbird.ru',
-			'flattr',
-			'diaspora',
-			'qzone',
-			'vk',
-			'weibo',
-			'ok.ru',
-			'douban',
-			'xing',
-			'renren',
-			'threema',
-			'sms',
-			'line.me',
-			'skype',
-			'telegram.me',
-			'gmail',
-			'yahoo',
-			***/
 
 	}
 
@@ -94,11 +66,12 @@ jQuery( document ).ready(function( $ ) {
 		const email_address = fixedEncodeURIComponent(args.email_address);
 		
 		return {
-			'email':'mailto:' + email_address + '?subject=' + title + '&body=' + url + escape("\n\n") + desc,
-			'facebook':'http://www.facebook.com/sharer.php?u=' + url,
-			'linkedin':'https://www.linkedin.com/sharing/share-offsite/?url=' + url,
-			'pinterest':'http://pinterest.com/pin/create/button/?url=' + url,
-			'twitter':'https://twitter.com/intent/tweet?url=' + url + '&text=' + title + '&via=' + via + '&hashtags=' + hash_tags
+			'email' : 'mailto:' + email_address + '?subject=' + title + '&body=' + url + escape("\n\n") + desc,
+			'facebook' : 'http://www.facebook.com/sharer.php?u=' + url,
+			'linkedin' : 'https://www.linkedin.com/sharing/share-offsite/?url=' + url,
+			'pinterest' : 'http://pinterest.com/pin/create/button/?url=' + url,
+			'twitter' : 'https://twitter.com/intent/tweet?url=' + url + '&text=' + title + '&via=' + via + '&hashtags=' + hash_tags,
+			'whatsapp' : 'https://api.whatsapp.com/send?text=' + title + '%20' + url
 		};
 	}
 
@@ -139,7 +112,7 @@ jQuery( document ).ready(function( $ ) {
 					'<a href="' + socialmediaurls[socialmedium] + '" target="_blank"><span>Jaa sähköpostitse</span>' + 
 					'</a></li>' 
 				);
-			} else if (socialmedium == 'facebook') {
+			} else if (socialmedium == 'facebook' || socialmedium == 'whatsapp') {
 				children.push(
 					'<li class="' + socialmedium + '">' +
 					'<a href="' + socialmediaurls[socialmedium] + '" target="_blank"><span>Jaa ' + capitalizeFirstLetter(socialmedium) + 'issa</span>' + 
@@ -168,7 +141,7 @@ jQuery( document ).ready(function( $ ) {
 	}
 
 	$('#social-sharing ul').append(children.join(''));
-	
+
 	// Button styles from settings page
 	// Used when shortcode is without attributes
 	const buttonStyles = $('#social-sharing-buttons').data();
