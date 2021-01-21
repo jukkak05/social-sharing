@@ -10,6 +10,7 @@ function social_sharing_shortcodes ( $atts = '' ) {
         'pinterest' => 0,
         'email' => 0,
         'linkedin' => 0,
+        'whatsapp' => 0,
         'twitterhandle' => '',
         'sharetitle' => '',
     ), $atts );
@@ -41,6 +42,7 @@ function settingsPageButtons() {
     $twitter_setting = '';
     $linkedin_setting = '';
     $email_setting = '';
+    $whatsapp_setting = '';
     $twitter_handle_setting = '';
     $pinterest_setting = '';
     $background = '';
@@ -70,6 +72,10 @@ function settingsPageButtons() {
 
     if ( isset($options['pinterest']) ) {
         $pinterest_setting = preg_replace("/[^1]/", "", $options['pinterest'] );
+    }
+
+    if ( isset($options['whatsapp']) ) {
+        $whatsapp_setting = preg_replace("/[^1]/", "", $options['whatsapp'] );
     }
 
     if ( isset($options['twitter_handle']) ) {
@@ -113,13 +119,13 @@ function settingsPageButtons() {
         $output .= '<span class="screen-reader-text">' . esc_html__( 'Share: ', 'social-sharing' ) . '</span>';
     }
 
-    $output .= '<ul id="social-sharing-buttons"' . 'data-settings-page="1"' . 'data-facebook="' . $facebook_setting . '"';
-    $output .= 'data-twitter="' . $twitter_setting . '"' . 'data-twitter-handle="' . $twitter_handle_setting . '"';
-    $output .= 'data-pinterest="' . $pinterest_setting . '"' . 'data-email="' . $email_setting . '"';
-    $output .= 'data-linkedin="' . $linkedin_setting . '"' . 'data-background="' . $background . '"';
-    $output .= 'data-hover="' . $background_hover . '"' . 'data-icon-color="'. $icon_color . '"';
-    $output .= 'data-icon-hover-color="' . $icon_hover_color . '"' . 'data-size="' . $size . '"';
-    $output .= 'data-style="' . $style . '"' . 'data-sharing-title="' . $sharing_title . '"' . '></ul></div>';
+    $output .= '<ul id="social-sharing-buttons" ' . 'data-settings-page="1" ' . 'data-facebook="' . $facebook_setting . '" ' . 'data-whatsapp="' . $whatsapp_setting . '" ';
+    $output .= 'data-twitter="' . $twitter_setting . '" ' . 'data-twitter-handle="' . $twitter_handle_setting . '" ';
+    $output .= 'data-pinterest="' . $pinterest_setting . '" ' . 'data-email="' . $email_setting . '" ';
+    $output .= 'data-linkedin="' . $linkedin_setting . '" ' . 'data-background="' . $background . '" ';
+    $output .= 'data-hover="' . $background_hover . '" ' . 'data-icon-color="'. $icon_color . '" ';
+    $output .= 'data-icon-hover-color="' . $icon_hover_color . '" ' . 'data-size="' . $size . '" ';
+    $output .= 'data-style="' . $style . '" ' . 'data-sharing-title="' . $sharing_title . '"' . '></ul></div>';
 
     return $output;
 
@@ -145,7 +151,7 @@ function shortCodeButtons($site) {
 
     // Output when shortcode attributes
     $output = '<div id="social-sharing">' . '<span class="screen-reader-text">' . esc_html__( 'Share: ', 'social-sharing' ) . '</span>'; 
-    $output .= '<ul id="social-sharing-buttons" data-facebook="' . $escaped_site['facebook'] .'" ';
+    $output .= '<ul id="social-sharing-buttons" data-facebook="' . $escaped_site['facebook'] . '" ' . 'data-whatsapp="' . $escaped_site['whatsapp'] . '" ';
     $output .= 'data-twitter="' . $escaped_site['twitter'] . '" ' . 'data-twitter-handle="' . $escaped_twitter_handle . '" ';
     $output .= 'data-pinterest="' . $escaped_site['pinterest'] . '" ' . 'data-email="' . $escaped_site['email'] . '" ';
     $output .= 'data-linkedin="' . $escaped_site['linkedin'] . '">';
