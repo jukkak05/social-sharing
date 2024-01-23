@@ -50,6 +50,16 @@ Plugin uses font awesome icons. You can easily change colors and icons with css,
 
 == Changelog ==
 
+= 1.5.2 =
+
+Fixed X logo for some languages
+
+= 1.5.1 =
+
+Updated to Font Awesome 6.4.2
+
+Changed Twitter logo to X
+
 = 1.5 =
 
 Added Whatsapp sharing and fixed data attribute spacing. 

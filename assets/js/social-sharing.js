@@ -101,7 +101,7 @@ jQuery( document ).ready(function( $ ) {
 
 	for(var i = 0; i < socialmedia.length; i++) {
 
-		const socialmedium = socialmedia[i];
+		let socialmedium = socialmedia[i];
 		const siteLang = $('html').attr('lang');
 
 		// Attach links to page
@@ -118,6 +118,12 @@ jQuery( document ).ready(function( $ ) {
 					'<a href="' + socialmediaurls[socialmedium] + '" target="_blank"><span>Jaa ' + capitalizeFirstLetter(socialmedium) + 'issa</span>' + 
 					'</a></li>' 
 				);
+			} else if (socialmedium  == 'twitter') {
+				children.push(
+					'<li class="x">' +
+					'<a href="' + socialmediaurls[socialmedium] + '" target="_blank"><span>Jaa X:ssä</span>' + 
+					'</a></li>' 
+				);
 			} else {
 				children.push(
 					'<li class="' + socialmedium + '">' +
@@ -125,10 +131,22 @@ jQuery( document ).ready(function( $ ) {
 					'</a></li>' 
 				);
 			}
-		} else if (siteLang == 'sv-SE') {
+		} else if (siteLang == 'sv' && socialmedium == 'twitter') {
+			children.push(
+				'<li class="x">' +
+				'<a href="' + socialmediaurls[socialmedium] + '" target="_blank"><span>Dela på X</span>' + 
+				'</a></li>' 
+			); 
+		} else if (siteLang == 'sv') {
 			children.push(
 				'<li class="' + socialmedium + '">' +
 				'<a href="' + socialmediaurls[socialmedium] + '" target="_blank"><span>Dela på ' + capitalizeFirstLetter(socialmedium) + '</span>' + 
+				'</a></li>' 
+			);
+		} else if (socialmedium == 'twitter') {
+			children.push(
+				'<li class="x">' +
+				'<a href="' + socialmediaurls[socialmedium] + '" target="_blank"><span>Share on X</span>' + 
 				'</a></li>' 
 			);
 		} else {

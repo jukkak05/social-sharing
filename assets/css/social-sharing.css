@@ -51,12 +51,12 @@
     font-variant: normal;
     text-rendering: auto;
 	line-height: 1;
-	font-family: "Font Awesome 5 Brands";
+	font-family: "Font Awesome 6 Brands";
 	padding-top: 11px;
 }
 
-#social-sharing-buttons li.twitter a:before {
-	content: "\f099";
+#social-sharing-buttons li.x a:before {
+	content: "\e61b";
 }
 
 #social-sharing-buttons li.facebook a:before  {
@@ -77,7 +77,7 @@
 
 #social-sharing-buttons li.email a:before  {
 	content: "\f0e0";
-	font-family: "Font Awesome 5 Free";
+	font-family: "Font Awesome 6 Free";
 }
 
 #social-sharing-buttons li a span {
