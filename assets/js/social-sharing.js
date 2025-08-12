@@ -166,48 +166,31 @@ jQuery( document ).ready(function( $ ) {
 
 	if (buttonStyles && buttonStyles.settingsPage) { 
 
-		if (buttonStyles.iconColor) {			
-			buttonIcon(buttonStyles.iconColor);
-		}
+		// Button size
+		buttonStyles.size ? buttonSize(buttonStyles.size) : buttonSize('2');
 
-		if (buttonStyles.background) { 			
-			buttonBackground(buttonStyles.background);
-		}
+		// Button background
+		buttonStyles.background ? buttonBackground(buttonStyles.background) : buttonBackground('transparent');
 
-		if (buttonStyles.size) {			
-			buttonSize(buttonStyles.size);
-		}
+		// Button hover background
+		buttonStyles.hover ? buttonHover(buttonStyles.hover) : buttonHover('transparent');
+	
+		// Button style
+		buttonStyles.style ? buttonStyle(buttonStyles.style) : buttonStyle('round');
 
-		if (buttonStyles.style) {			
-			buttonStyle(buttonStyles.style);
-		}
+		// Icon color
+		buttonStyles.iconColor ? buttonIcon(buttonStyles.iconColor) : buttonIcon('#000000');
 
-		if (buttonStyles.hover) {
-			buttonHover(buttonStyles.hover);
-		}
-
-		if (!buttonStyles.hover) {
-			buttonHoverNoSetting();
-		}
-
-		if (buttonStyles.iconHoverColor) {
-			buttonIconHover(buttonStyles.iconHoverColor);
-		}
-
-		if (!buttonStyles.iconHoverColor) {
-			buttonIconHoverNoSetting();
-		}
+		// Icon hover color
+		buttonStyles.iconHoverColor ? buttonIconHover(buttonStyles.iconHoverColor) : buttonIconHover('#000000');
 
 	}
 
 	function buttonBackground(background) {
-
 		$('#social-sharing-buttons li a').css('background', background);
-
 	}
 
 	function buttonStyle(style) {
-
 		switch (style) {
 			case 2: 
 			$('#social-sharing-buttons li').addClass('square');	
@@ -218,44 +201,117 @@ jQuery( document ).ready(function( $ ) {
 		}
 	}
 
-	function buttonIcon(color) {
+	function buttonIcon(iconColor) {
 
-		$('#social-sharing-buttons li a').css('color', color); 
+		$('#social-sharing-buttons li').each(function () {
+
+			// jQuery object of link element
+			const $linkElement = $(this).find('a');
+
+			// Content attribute of link element
+			let content = window.getComputedStyle($linkElement[0], '::before').getPropertyValue('content');
+
+			// Remove wrapping quotes if present
+			if (content.startsWith('"') || content.startsWith("'")) {
+				content = content.slice(1, -1);
+			}
+
+			// Extract SVG data from url("data:image/svg+xml,...")
+			const match = content.match(/^url\("data:image\/svg\+xml,(.*)"\)$/);
+			if (!match) return;
+
+			// Decode svg string
+			let svg = decodeURIComponent(match[1]);
+
+			// Set icon size
+			const size = $('#social-sharing-buttons').data('size');
+			let iconWidth, iconHeight;
+			switch (size) {
+				case 1: iconWidth = '18'; iconHeight = '12'; break;
+				case 2: iconWidth = '26'; iconHeight = '16'; break;
+				case 3: iconWidth = '30'; iconHeight = '20'; break;
+				default: iconWidth = '26'; iconHeight = '15'; break;
+			}
+
+			svg = svg.replace('<svg', `<svg width="${iconWidth}" height="${iconHeight}"`);
+
+			// Replace fill attribute from svg string
+			svg = svg.replace(/fill=(['"])(#[0-9A-Fa-f]{3,6}|[a-zA-Z]+)\1/, 'fill="' + iconColor + '"');
+
+			// Re-encode svg string and set as CSS variable
+			const encoded = encodeURIComponent(svg).replace(/'/g, "%27").replace(/"/g, "%22");
+			svgUri = 'url("data:image/svg+xml,' + encoded + '")';
+			$linkElement.css('--svg-uri', svgUri);
+	
+		});
 
 	}
 
-	function buttonIconHover(iconHover) {
+	function buttonIconHover(iconHoverColor) {
 
-		const currentIconColor = $('#social-sharing-buttons li a').css('color');
+		$('#social-sharing-buttons li a').on('mouseenter', function() {
 
-		$('#social-sharing-buttons li a').mouseover( function() {
+			// jQuery object of link element
+			const $linkElement = $(this);
 
-			$(this).css('color', iconHover);
+			// Variable to store svgUri
+			let svgUri; 
 
-	   }); 
-	   
-	   $('#social-sharing-buttons li a').mouseout( function() {
-		   
-		   $(this).css('color', currentIconColor);
-	   
-	   });
+			// Check if hover svg uri is set as data attribute
+			if ($linkElement.data('hover-svg-uri')) {
 
-	}
+				svgUri = $linkElement.data('hover-svg-uri');
+				$linkElement.css('--svg-hover-uri', svgUri);
 
-	function buttonIconHoverNoSetting() {
+			// Proceed to create the hover svg uri
+			} else {
 
-		const currentIconColor = $('#social-sharing-buttons li a').css('color');
+				// Content attribute of link element
+				let content = window.getComputedStyle($linkElement[0], '::before').getPropertyValue('content');
+				if (!content) return;
 
-		$('#social-sharing-buttons li a').mouseover( function() {
+				// Remove wrapping quotes if present
+				if (content.startsWith('"') || content.startsWith("'")) {
+					content = content.slice(1, -1);
+				}
 
-			$(this).css('color', currentIconColor);
+				// Extract SVG data from url("data:image/svg+xml,...")
+				const match = content.match(/^url\("data:image\/svg\+xml,(.*)"\)$/);
+				if (!match) return;
+
+				// Decode svg string
+				let svg = decodeURIComponent(match[1]);
+
+				// Set icon size
+				const size = $('#social-sharing-buttons').data('size');
+				let iconWidth, iconHeight;
+				switch (size) {
+					case 1: iconWidth = '18'; iconHeight = '12'; break;
+					case 2: iconWidth = '26'; iconHeight = '16'; break;
+					case 3: iconWidth = '30'; iconHeight = '20'; break;
+					default: iconWidth = '26'; iconHeight = '15'; break;
+				}
+
+				svg = svg.replace('<svg', `<svg width="${iconWidth}" height="${iconHeight}"`);
+
+				// Replace fill attribute from svg string
+				svg = svg.replace(/fill=(['"])(#[0-9A-Fa-f]{3,6}|[a-zA-Z]+)\1/, 'fill="' + iconHoverColor + '"');
+
+				// Re-encode svg string and set as CSS variable
+				const encoded = encodeURIComponent(svg).replace(/'/g, "%27").replace(/"/g, "%22");
+				svgUri = 'url("data:image/svg+xml,' + encoded + '")';
+				$linkElement.css('--svg-hover-uri', svgUri);
+
+				// Store the link element hover svg uri as data attribute
+				$linkElement.data('hover-svg-uri', svgUri);
+
+			}
 
 	   }); 
 
 	}
 
 	function buttonSize(size) {
-		
 		switch (size) {
 			case 1:
 			$('#social-sharing-buttons li').addClass('small');
@@ -268,33 +324,18 @@ jQuery( document ).ready(function( $ ) {
 			default:
 			break;
 		}
-
 	}
 
 	function buttonHover(hover) {
 
-		const currentBg = $('#social-sharing-buttons li a').css('background-color');
+		const backgroundColor = $('#social-sharing-buttons').data('background');
 
-		$('#social-sharing-buttons li a').mouseover( function() {
-
+		$('#social-sharing-buttons li a').on('mouseenter', function() {
 			 $(this).css('background', hover);
-
 		}); 
 		
-		$('#social-sharing-buttons li a').mouseout( function() {
-			
-			$(this).css('background', currentBg);
-		
-		});
-
-	}
-
-	function buttonHoverNoSetting() {
-
-		const currentBg = $('#social-sharing-buttons li a').css('background-color');
-
-		$('#social-sharing-buttons li a').mouseover(function () {
-			$(this).css('background-color', currentBg);
+		$('#social-sharing-buttons li a').on('mouseleave', function() {
+			$(this).css('background', backgroundColor);
 		});
 
 	}

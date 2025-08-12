@@ -46,9 +46,13 @@ Example: [social-sharing email=1 linkedin=1 twitter=1 twitterhandle=konseptofi]
 
 Sharing links will have correct information if you have seo meta tags on page. 
 
-Plugin uses font awesome icons. You can easily change colors and icons with css, see social-sharing.css. 
+Plugin uses font awesome icons. 
 
 == Changelog ==
+
+= 1.6.0 =
+
+Removed font awesome stylesheets and switched to using icons in data uri format
 
 = 1.5.2 =
 

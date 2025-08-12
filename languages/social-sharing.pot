@@ -1,98 +1,113 @@
-#, fuzzy
+# Copyright (C) 2025 Jukka Kalenius
+# This file is distributed under the BSD 3-Clause License.
 msgid ""
 msgstr ""
-"Project-Id-Version: Social Sharing\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: Social Sharing 1.6.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/social-sharing\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Jukka Kalenius <jukka.kalenius@konsepto.fi>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-04-17 15:37+0300\n"
+"POT-Creation-Date: 2025-08-12T12:22:28+03:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: Poedit 2.2.4\n"
-"X-Domain: inc\n"
-"X-Poedit-KeywordsList: esc_html__;esc_html_e\n"
-"X-Poedit-Basepath: ../inc\n"
-"X-Poedit-SearchPath-0: .\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: social-sharing\n"
 
-#: social-sharing-settings.php:59
+#. Plugin Name of the plugin
+#: social-sharing.php
+msgid "Social Sharing"
+msgstr ""
+
+#. Description of the plugin
+#: social-sharing.php
+msgid "Social media sharing buttons."
+msgstr ""
+
+#. Author of the plugin
+#: social-sharing.php
+msgid "Jukka Kalenius"
+msgstr ""
+
+#. Author URI of the plugin
+#: social-sharing.php
+msgid "https://github.com/jukkak05"
+msgstr ""
+
+#: inc/social-sharing-settings.php:57
 msgid "Appearance"
 msgstr ""
 
-#: social-sharing-settings.php:69
+#: inc/social-sharing-settings.php:67
 msgid "Use shortcode [social-sharing] for settings page version. If you use shortcode attributes then these settings are overridden."
 msgstr ""
 
-#: social-sharing-settings.php:71
-msgid "Available attributes are: facebook=1 twitter=1 email=1 linkedin=1 pinterest=1 twitterhandle=handle."
+#: inc/social-sharing-settings.php:69
+msgid "Available attributes are: facebook=1 twitter=1 linkedin=1 pinterest=1 whatsapp=1 email=1 twitterhandle=handle."
 msgstr ""
 
-#: social-sharing-settings.php:83
+#: inc/social-sharing-settings.php:81
 msgid "Social Media Sites"
 msgstr ""
 
-#: social-sharing-settings.php:92
+#: inc/social-sharing-settings.php:90
 msgid "Twitter handle"
 msgstr ""
 
-#: social-sharing-settings.php:101
+#: inc/social-sharing-settings.php:99
 msgid "Background color"
 msgstr ""
 
-#: social-sharing-settings.php:110
+#: inc/social-sharing-settings.php:108
 msgid "Background hover"
 msgstr ""
 
-#: social-sharing-settings.php:119
+#: inc/social-sharing-settings.php:117
 msgid "Icon color"
 msgstr ""
 
-#: social-sharing-settings.php:128
+#: inc/social-sharing-settings.php:126
 msgid "Icon hover color"
 msgstr ""
 
-#: social-sharing-settings.php:137
+#: inc/social-sharing-settings.php:135
 msgid "Size"
 msgstr ""
 
-#: social-sharing-settings.php:146
+#: inc/social-sharing-settings.php:144
 msgid "Style"
 msgstr ""
 
-#: social-sharing-settings.php:155
+#: inc/social-sharing-settings.php:153
 msgid "Show sharing title"
 msgstr ""
 
-#: social-sharing-settings.php:164
+#: inc/social-sharing-settings.php:162
 msgid "Buttons stylesheet"
 msgstr ""
 
-#: social-sharing-settings.php:173
-msgid "Font awesome stylesheet"
-msgstr ""
-
-#: social-sharing-settings.php:329
+#: inc/social-sharing-settings.php:327
 msgid "Small (26x26)"
 msgstr ""
 
-#: social-sharing-settings.php:333
+#: inc/social-sharing-settings.php:331
 msgid "Medium (38x38)"
 msgstr ""
 
-#: social-sharing-settings.php:337
+#: inc/social-sharing-settings.php:335
 msgid "Large (46x46)"
 msgstr ""
 
-#: social-sharing-settings.php:357
+#: inc/social-sharing-settings.php:355
 msgid "Round"
 msgstr ""
 
-#: social-sharing-settings.php:361
+#: inc/social-sharing-settings.php:359
 msgid "Square"
 msgstr ""
 
-#: social-sharing-shortcodes.php:111 social-sharing-shortcodes.php:113
-#: social-sharing-shortcodes.php:147
+#: inc/social-sharing-shortcodes.php:117
+#: inc/social-sharing-shortcodes.php:119
+#: inc/social-sharing-shortcodes.php:153
 msgid "Share: "
 msgstr ""

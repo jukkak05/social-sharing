@@ -18,9 +18,7 @@ function social_sharing_settings_page_markup() {
 
     // Double check user capabilities 
     if ( !current_user_can( 'manage_options' ) ) {
-
         return;
-
     }
 
     // Settings page markup
@@ -163,15 +161,6 @@ function social_sharing_settings_fields () {
         'social_sharing_settings_stylesheet', 
         esc_html__( 'Buttons stylesheet', 'social-sharing' ), 
         'social_sharing_settings_stylesheet_callback', 
-        'social-sharing', 
-        'social_sharing_settings_styles_section' 
-    );
-
-    // Font awesome css
-    add_settings_field(
-        'social_sharing_settings_font_awesome', 
-        esc_html__( 'Font awesome stylesheet', 'social-sharing' ), 
-        'social_sharing_settings_font_awesome_callback', 
         'social-sharing', 
         'social_sharing_settings_styles_section' 
     );
@@ -409,24 +398,6 @@ function social_sharing_settings_stylesheet_callback() {
 
 }
 
-function social_sharing_settings_font_awesome_callback() {
-
-    $options = get_option( 'social_sharing_settings' );
-
-    $font_awesome = '';
-
-    if ( isset($options['font_awesome']) ) {
-
-        $font_awesome = $options['font_awesome'];
-
-    }
-
-    $html = '<input type="checkbox" id="font-awesome" name="social_sharing_settings[font_awesome]" value="1"' . checked( 1, $font_awesome, false ) . '/>';
-   
-    echo $html;
-
-}
-
 function social_sharing_settings_sanitize_callback($input) {
 
     $output = array();
@@ -447,7 +418,6 @@ function social_sharing_settings_sanitize_callback($input) {
         'style', 
         'sharing_title',
         'stylesheet', 
-        'font_awesome',
         'whatsapp',
     ];
     
